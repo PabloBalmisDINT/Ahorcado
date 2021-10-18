@@ -1,0 +1,42 @@
+﻿<Window x:Class="Ahorcado.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Ahorcado"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Margin"
+                    Value="5"></Setter>
+        </Style>
+    </Window.Resources>
+    <DockPanel>
+        <TextBlock DockPanel.Dock="Top"
+                   FontSize="40"
+                   TextAlignment="Center"> 
+            Ahorcado
+        </TextBlock>
+        <StackPanel DockPanel.Dock="Bottom" 
+                    Orientation="Horizontal">
+            <Button>Nueva partida</Button>
+            <Button>Rendirse</Button>
+        </StackPanel>
+        <Grid DockPanel.Dock="Left">
+            <Image Source="./assets/0.jpg"></Image>
+        </Grid>
+        <DockPanel>
+            <StackPanel DockPanel.Dock="Top" 
+                        Orientation="Horizontal"
+                        x:Name="Palabra_StackPanel">
+                <!--Aqui van las letras con la barra de desplazamiento-->
+            </StackPanel>
+            <UniformGrid x:Name="Letras_UniformGrid"
+                         Rows="3"
+                         Columns="9">
+                
+            </UniformGrid>
+        </DockPanel>
+    </DockPanel>
+</Window>
