@@ -5,7 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Ahorcado"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Ahorcado" 
+        Height="450" 
+        Width="800"
+        MinHeight="450"
+        MinWidth="800"
+        KeyDown="WindowKeyDown">
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="Margin"
@@ -20,18 +25,22 @@
         </TextBlock>
         <StackPanel DockPanel.Dock="Bottom" 
                     Orientation="Horizontal">
-            <Button>Nueva partida</Button>
-            <Button>Rendirse</Button>
+            <Button Click="Button_Click">Nueva partida</Button>
+            <Button Click="Button_Click_1">Rendirse</Button>
         </StackPanel>
         <Grid DockPanel.Dock="Left">
-            <Image Source="./assets/0.jpg"></Image>
+            <Image x:Name="Imagen_Image"
+                   Source="./assets/0.jpg"></Image>
         </Grid>
         <DockPanel>
-            <StackPanel DockPanel.Dock="Top" 
-                        Orientation="Horizontal"
-                        x:Name="Palabra_StackPanel">
-                <!--Aqui van las letras con la barra de desplazamiento-->
-            </StackPanel>
+            <ScrollViewer HorizontalScrollBarVisibility="Visible"
+                          VerticalScrollBarVisibility="Disabled"
+                          DockPanel.Dock="Top">
+                <StackPanel Orientation="Horizontal"
+                            x:Name="Palabra_StackPanel">
+                    <!--Aqui van las letras con la barra de desplazamiento-->
+                </StackPanel>
+            </ScrollViewer>
             <UniformGrid x:Name="Letras_UniformGrid"
                          Rows="3"
                          Columns="9">
