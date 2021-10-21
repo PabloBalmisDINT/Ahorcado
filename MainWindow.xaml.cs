@@ -30,13 +30,13 @@ namespace Ahorcado
             
         }
 
-        public void IniciarPartida()
+        public void IniciarPartida() //Pongo todo para empezar una partida nueva
         {
             vidas = 10;
             letrasAcertadas = 0;
             BitmapImage imagen = new BitmapImage();
             imagen.BeginInit();
-            imagen.UriSource = new Uri("./assets/0.jpg", UriKind.Relative);
+            imagen.UriSource = new Uri("./assets/10.jpg", UriKind.Relative);
             imagen.EndInit();
             Imagen_Image.Source = imagen;
             Palabra_StackPanel.Children.Clear();
@@ -96,122 +96,87 @@ namespace Ahorcado
             vidas--;
             BitmapImage imagen = new BitmapImage();
             imagen.BeginInit();
-            string rutaImagen = "";
-            switch(vidas)
-            {
-                case 10:
-                    {
-                        rutaImagen = "./assets/0.jpg";
-                        
-                        break;
-                    }
-                case 9:
-                    {
-                        rutaImagen = "./assets/1.jpg";
-                        break;
-                    }
-                case 8:
-                    {
-                        rutaImagen = "./assets/2.jpg";
-                        break;
-                    }
-                case 7:
-                    {
-                        rutaImagen = "./assets/3.jpg";
-                        break;
-                    }
-                case 6:
-                    {
-                        rutaImagen = "./assets/4.jpg";
-                        break;
-                    }
-                case 5:
-                    {
-                        rutaImagen = "./assets/5.jpg";
-                        break;
-                    }
-                case 4:
-                    {
-                        rutaImagen = "./assets/6.jpg";
-                        break;
-                    }
-                case 3:
-                    {
-                        rutaImagen = "./assets/7.jpg";
-                        break;
-                    }
-                case 2:
-                    {
-                        rutaImagen = "./assets/8.jpg";
-                        break;
-                    }
-                case 1:
-                    {
-                        rutaImagen = "./assets/9.jpg";
-                        break;
-                    }
-                case 0:
-                    {
-                        rutaImagen = "./assets/10.jpg";
-                        break;
-                    }
-            }
-            imagen.UriSource = new Uri(rutaImagen, UriKind.Relative);//cambio la foto del ahorcado acorde a las vidas
+            string rutaImagen = "./assets/" + vidas + ".jpg"; //cambio la foto del ahorcado acorde a las vidas
+            imagen.UriSource = new Uri(rutaImagen, UriKind.Relative);
             imagen.EndInit();
             Imagen_Image.Source = imagen;
             if (vidas == 0) //Ejecuto la parte de perder la partida
             {
-                for(int i = 0; i < Letras_UniformGrid.Children.Count; i++)
-                {
-                    Button botonLetra = (Button) Letras_UniformGrid.Children[i];
-                    botonLetra.IsEnabled = false;
-                }
-                MessageBox.Show("Has perdido");
+                DesactivarBotones();
+                MessageBox.Show("Has perdido", "Fin de la partida");
             }
         }
 
-        private void Button_Click_Letras(object sender, RoutedEventArgs e)
+        private void Button_Click_Letras(object sender, RoutedEventArgs e) 
         {
             Button boton = (Button) sender;
+            LogicaLetras(boton);
+        }
+
+        private void LogicaLetras(Button boton) //Logica de las letras
+        {
             boton.IsEnabled = false;
             char letra = boton.Tag.ToString()[0];
             char[] letrasPalabra = palabra.ToCharArray();
             bool acertado = false;
-            for(int i = 0; i < letrasPalabra.Length; i++)
+            for (int i = 0; i < letrasPalabra.Length; i++)
             {
-                if(letra == letrasPalabra[i])
+                if (letra == letrasPalabra[i])
                 {
-                    DockPanel dockPanelPalabra = (DockPanel) Palabra_StackPanel.Children[i];
-                    TextBlock textBoxLetra = (TextBlock) dockPanelPalabra.Children[1];
+                    DockPanel dockPanelPalabra = (DockPanel)Palabra_StackPanel.Children[i];
+                    TextBlock textBoxLetra = (TextBlock)dockPanelPalabra.Children[1];
                     textBoxLetra.Text = letra.ToString();
                     acertado = true;
                     letrasAcertadas++;
                 }
             }
-            if(!acertado)
+            if (!acertado)
             {
                 FallarLetra();
             }
-            if(letrasAcertadas == letrasPalabra.Length)
+            if (letrasAcertadas == letrasPalabra.Length)
             {
-                MessageBox.Show("Has ganado");
+                DesactivarBotones();
+                MessageBox.Show("Has ganado", "Fin de la parida");
             }
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)//Boton de rendirse
         {
             char[] letrasPalabra = palabra.ToCharArray();
-            for(int i = 0; i < letrasPalabra.Length; i++)
+            for(int i = 0; i < letrasPalabra.Length; i++) //Muestro la palabra a adivinar
             {
                 DockPanel dockPanelPalabra = (DockPanel)Palabra_StackPanel.Children[i];
                 TextBlock textBoxLetra = (TextBlock)dockPanelPalabra.Children[1];
                 textBoxLetra.Text = letrasPalabra[i].ToString();
             }
+            DesactivarBotones();
         }
 
         private void WindowKeyDown(object sender, KeyEventArgs e) //Metodo para activar las teclas pulsando el teclado
         {
-            //hacer el metodo de las teclas para pulsar
+            Key tecla = e.Key;
+            UIElementCollection letras = Letras_UniformGrid.Children;
+            for(int i = 0; i <  letras.Count; i++) //Recorro todos los botones y si su tag coincide con el boton activo ese boton
+            {
+                Button botonLetra = (Button)letras[i];
+                if(botonLetra.Tag.ToString() == tecla.ToString())
+                {
+                    if (botonLetra.IsEnabled)//Compruebo que el boton que voy a pulsar no este desactivado para no volver a pulsarlo
+                    {
+                        LogicaLetras(botonLetra);
+                    }
+                }
+            }
+        }
+
+        private void DesactivarBotones()
+        {
+            for (int i = 0; i < Letras_UniformGrid.Children.Count; i++)
+            {
+                Button botonLetra = (Button)Letras_UniformGrid.Children[i];
+                botonLetra.IsEnabled = false;
+            }
         }
     }
 }

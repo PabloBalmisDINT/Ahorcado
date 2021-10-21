@@ -16,21 +16,26 @@
             <Setter Property="Margin"
                     Value="5"></Setter>
         </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize"
+                    Value="40"></Setter>
+        </Style>
     </Window.Resources>
     <DockPanel>
         <TextBlock DockPanel.Dock="Top"
-                   FontSize="40"
                    TextAlignment="Center"> 
             Ahorcado
         </TextBlock>
         <StackPanel DockPanel.Dock="Bottom" 
                     Orientation="Horizontal">
-            <Button Click="Button_Click">Nueva partida</Button>
-            <Button Click="Button_Click_1">Rendirse</Button>
+            <Button Click="Button_Click"
+                    IsDefault="True">Nueva partida</Button>
+            <Button Click="Button_Click_1"
+                    IsCancel="True">Rendirse</Button>
         </StackPanel>
         <Grid DockPanel.Dock="Left">
             <Image x:Name="Imagen_Image"
-                   Source="./assets/0.jpg"></Image>
+                   Source="./assets/10.jpg"></Image>
         </Grid>
         <DockPanel>
             <ScrollViewer HorizontalScrollBarVisibility="Visible"
