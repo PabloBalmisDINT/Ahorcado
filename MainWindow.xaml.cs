@@ -65,7 +65,9 @@ namespace Ahorcado
 
         private void GenerarPalabras()
         {
-            string[] palabras = { "HOLA", "PRUEBA"};
+            string[] palabras = { "ACDC", "BLACK SABBATH", "BON JOVI", "BRUCE SPRINGSTEEN", "EXTREMODURO", "DESAKATO", "FOO FIGHTERS", "GREEN DAY", "GRETA VAN FLEET", 
+                "GUNS N ROSES", "IRON MAIDEN", "LA RAIZ", "LED ZEPPELIN", "LINKIN PARK", "METALLICA", "MOTORHEAD", "NIRVANA", "OZZY OSBOURNE", "PARAMORE", "THE POLICE",
+                "QUEEN", "RAGE AGAINST THE MACHINE", "RED HOT CHILI PEPPERS", "SCORPIONS", "SONS OF AGUIRRE", "VAN HALEN", "TRIVIUM", "THE WARNING"};
             Random semilla = new Random();
             int aleatorio = semilla.Next(0, palabras.Length);
             palabra = palabras[aleatorio];//Genero la palabra de la partida
@@ -75,7 +77,14 @@ namespace Ahorcado
                 TextBlock letra = new TextBlock();
                 TextBlock abajo = new TextBlock();
                 letra.FontSize = 90;
-                abajo.Background = Brushes.Black;
+                if(palabra.ToCharArray()[i] == ' ') // Esto lo hago para poder poder poner`palabras con espacios
+                {
+                    abajo.Background = Brushes.White;
+                }
+                else
+                {
+                    abajo.Background = Brushes.Black;
+                }
                 dockPanel.Children.Add(abajo);
                 dockPanel.Children.Add(letra);
                 DockPanel.SetDock(abajo, Dock.Bottom);
@@ -134,7 +143,7 @@ namespace Ahorcado
             {
                 FallarLetra();
             }
-            if (letrasAcertadas == letrasPalabra.Length)
+            if (letrasAcertadas == palabra.Replace(" ", "").Length)
             {
                 DesactivarBotones();
                 MessageBox.Show("Has ganado", "Fin de la parida");

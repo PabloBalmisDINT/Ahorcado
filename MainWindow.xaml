@@ -5,12 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Ahorcado"
         mc:Ignorable="d"
-        Title="Ahorcado" 
-        Height="450" 
+        Title="Ahorcado"
+        Height="450"
         Width="800"
         MinHeight="450"
         MinWidth="800"
-        KeyDown="WindowKeyDown">
+        KeyDown="WindowKeyDown"
+        Icon="./assets/32(1).ico">
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="Margin"
@@ -24,7 +25,7 @@
     <DockPanel>
         <TextBlock DockPanel.Dock="Top"
                    TextAlignment="Center"> 
-            Ahorcado
+            AHORCADO
         </TextBlock>
         <StackPanel DockPanel.Dock="Bottom" 
                     Orientation="Horizontal">
