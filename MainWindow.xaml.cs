@@ -112,7 +112,7 @@ namespace Ahorcado
             if (vidas == 0) //Ejecuto la parte de perder la partida
             {
                 DesactivarBotones();
-                MessageBox.Show("Has perdido", "Fin de la partida");
+                MessageBox.Show("Has perdido", "Fin de la partida", MessageBoxButton.OK, MessageBoxImage.Hand);
             }
         }
 
@@ -146,7 +146,7 @@ namespace Ahorcado
             if (letrasAcertadas == palabra.Replace(" ", "").Length)
             {
                 DesactivarBotones();
-                MessageBox.Show("Has ganado", "Fin de la parida");
+                MessageBox.Show("Has ganado", "Fin de la parida", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
@@ -169,6 +169,10 @@ namespace Ahorcado
             for(int i = 0; i <  letras.Count; i++) //Recorro todos los botones y si su tag coincide con el boton activo ese boton
             {
                 Button botonLetra = (Button)letras[i];
+                if(i == 14 && tecla.ToString() == "Oem3") //Comprobar la ñ
+                {
+                    LogicaLetras(botonLetra);
+                }
                 if(botonLetra.Tag.ToString() == tecla.ToString())
                 {
                     if (botonLetra.IsEnabled)//Compruebo que el boton que voy a pulsar no este desactivado para no volver a pulsarlo
