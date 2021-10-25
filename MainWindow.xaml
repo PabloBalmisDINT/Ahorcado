@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:Ahorcado"
         mc:Ignorable="d"
         Title="Ahorcado"
-        Height="450"
-        Width="800"
+        Height="650"
+        Width="1000"
         MinHeight="450"
         MinWidth="800"
         KeyDown="WindowKeyDown"
@@ -17,9 +17,19 @@
             <Setter Property="Margin"
                     Value="5"></Setter>
         </Style>
+        <Style TargetType="Button" x:Key="Botones_Abajo" BasedOn="{StaticResource {x:Type Button}}">
+            <Setter Property="Height"
+                    Value="35"></Setter>
+        </Style>
         <Style TargetType="TextBlock">
             <Setter Property="FontSize"
                     Value="40"></Setter>
+        </Style>
+        <Style TargetType="Image">
+            <Setter Property="Margin"
+                    Value="10"></Setter>
+            <Setter Property="MaxWidth"
+                    Value="300"></Setter>
         </Style>
     </Window.Resources>
     <DockPanel>
@@ -29,9 +39,11 @@
         </TextBlock>
         <StackPanel DockPanel.Dock="Bottom" 
                     Orientation="Horizontal">
-            <Button Click="Button_Click"
+            <Button Style="{StaticResource Botones_Abajo}"
+                    Click="Button_Click"
                     IsDefault="True">Nueva partida</Button>
-            <Button Click="Button_Click_1"
+            <Button Style="{StaticResource Botones_Abajo}"
+                    Click="Button_Click_1"
                     IsCancel="True">Rendirse</Button>
         </StackPanel>
         <Grid DockPanel.Dock="Left">
@@ -43,7 +55,8 @@
                           VerticalScrollBarVisibility="Disabled"
                           DockPanel.Dock="Top">
                 <StackPanel Orientation="Horizontal"
-                            x:Name="Palabra_StackPanel">
+                            x:Name="Palabra_StackPanel"
+                            HorizontalAlignment="Center">
                     <!--Aqui van las letras con la barra de desplazamiento-->
                 </StackPanel>
             </ScrollViewer>
